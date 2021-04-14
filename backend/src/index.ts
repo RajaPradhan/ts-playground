@@ -1,11 +1,18 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
+// import { PasswordManager } from './PasswordManager';
 
-const PORT = process.env.PORT || 5000;
+import { SignedUrlGenerator } from './SignedUrlGenerator';
 
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
+// (async () => {
+//     const passwordManager = new PasswordManager();
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+//     await passwordManager.toHash('myPassword');
+
+//     console.log(await passwordManager.isValidPassowrd('myPassword'));
+//     console.log(await passwordManager.isValidPassowrd('sndnsdnds'));
+// })();
+
+const url = 'https://www.xyz.com/cat.png';
+
+const signedUrlGenerator = new SignedUrlGenerator({ secret: 'gsg2675' });
+const signedUrl = signedUrlGenerator.sign(url);
+console.log(signedUrlGenerator.verify(signedUrl));
